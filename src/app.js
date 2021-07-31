@@ -46,6 +46,14 @@ app.use(passport.initialize());
 passport.use('jwt', jwtStrategy);
 passport.use('github', githubStrategy);
 
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
 // limit repeated failed requests to auth endpoints
 if (config.env === 'production') {
   app.use('/v1/auth', authLimiter);
